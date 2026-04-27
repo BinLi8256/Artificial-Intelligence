@@ -49,7 +49,7 @@ Common constraints are
 
 ### 5. Backtracking Example
 
-Let's use a toy example to run through the algorithm. The core is try --> check --> go deeper
+Let's use a toy example to run through the algorithm. The key is try --> check --> go deeper (--> fail --> undo -->try next option).
 
 #### Problem Setup
 
