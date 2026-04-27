@@ -28,7 +28,7 @@ Common constraints are
    **BacktrackingSearch(assignment, cap):** <br>
      **if** assignment is complete:<br>
        **return** assignment<br>
-     var = **SelectUnassignedVariable(cap)<br>
+     var = **SelectUnassignedVariable(cap)**<br>
      **for** each value **in** Order DomainValyes(var, cap):<br>
        **if** valueis consistent with assignment:<br>
          assignment[var] = value<br>
