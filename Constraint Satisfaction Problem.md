@@ -46,44 +46,12 @@ Common constraints are
               **return** result<br>
             **return** failure<br>
 
-3. Toy Example
+
+### Backtracking Example
 
 Let's use a toy example to run through the algorithm.
 
-- Variables: A, B, C
-- Domains: {blue, red} for each of them
-- Constraints: A != B, B != C
-- Goal: assign colors so neighbors are different
-
-**Steps**
-
-step 0: assignment = {}
-step 1: pick variable A
-
-A = Red
-assignment = {A: Red}
-
-Step 2: pick variable B
-
-Try values in order: 
-   (1) try B = Red: violates A != B
-       --> Reject
-   (2) try B = Blue: satisfies A != B
-       assignment = {A: Red, B: Blue}
-
-Step 3: Pick Variable C
-
-Try values in order:
-   (1) try C = Red: satisfies B != C
-       assignment = {A: Red, B: Blue, C: Red}
-
-Step 4: Return Solution
-
-# Backtracking Example
-
-Let's use a toy example to run through the algorithm.
-
-## Problem Setup
+#### Problem Setup
 
 - **Variables:** A, B, C  
 - **Domains:** {blue, red} for each  
@@ -94,16 +62,16 @@ Let's use a toy example to run through the algorithm.
 
 ---
 
-## Steps
+#### Steps
 
-### Step 0
+##### Step 0
 ```text
 assignment = {}
 ```
 
 ---
 
-### Step 1: Pick variable A
+##### Step 1: Pick variable A
 ```text
 A = Red
 assignment = {A: Red}
@@ -111,7 +79,7 @@ assignment = {A: Red}
 
 ---
 
-### Step 2: Pick variable B
+##### Step 2: Pick variable B
 
 Try values in order:
 
@@ -125,7 +93,7 @@ assignment = {A: Red, B: Blue}
 
 ---
 
-### Step 3: Pick variable C
+##### Step 3: Pick variable C
 
 Try values in order:
 
@@ -137,7 +105,7 @@ assignment = {A: Red, B: Blue, C: Red}
 
 ---
 
-### Step 4: Return Solution 🎉
+#### Step 4: Return Solution 🎉
 
 ```text
 {A: Red, B: Blue, C: Red}
