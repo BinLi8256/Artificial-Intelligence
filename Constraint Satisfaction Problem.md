@@ -24,7 +24,7 @@ Common constraints are
 1. Naive approach: generate and test
    + Generate all possible assignments --> test each one
    - problem: exponential number of combinations
-2. Backtracking Search (The standard algorithm for CSPs)
+2. Backtracking Search (The standard algorithm for CSPs) <br>
    **BacktrackingSearch(assignment, cap):** <br>
      **if** assignment is complete:<br>
        **return** assignment<br>
