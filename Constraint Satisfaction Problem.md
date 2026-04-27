@@ -1,8 +1,8 @@
-### Core Idea
+### 1. Core Idea
 
 Constraint Satisfaction Problems (CSPs) find values for a set of variables such that all constraints are satisfied. Instead of teaching for a path to a goal, it searches for an assignment that satisfies all the fules.
 
-### Components
+### 2. Components
 
 It has three components.
 1. Variables
@@ -12,14 +12,14 @@ It has three components.
 3. Constraints
    Rules that restrict which combinations of values are allowed
 
-### Types of Constraints
+### 3. Types of Constraints
 
 Common constraints are
 1. Uniary -- restricts one variable
 2. Binary -- restricts two variables
 3. Higher-order -- restricts 3+ variables
 
-### How to Solve CSPs
+### 4. How to Solve CSPs
 
 1. Naive approach: generate and test
    + Generate all possible assignments --> test each one
@@ -47,7 +47,7 @@ Common constraints are
             **return** failure<br>
 
 
-### Backtracking Example
+### 5. Backtracking Example
 
 Let's use a toy example to run through the algorithm.
 
