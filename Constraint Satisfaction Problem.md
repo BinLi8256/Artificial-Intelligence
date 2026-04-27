@@ -34,5 +34,23 @@ Common constraints are
          assignment[var] = value<br>
          result = BacktrackingSearch(assignment, cap)<br>
          **if** result != failure:<br>
+
+   **BacktrackingSearch(assignment, cap):** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;**if** assignment is complete:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**return** assignment<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;var = **SelectUnassignedVariable(cap)**<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;**for** each value **in** OrderDomainValues(var, cap):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**if** value is consistent with assignment:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assignment[var] = value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = BacktrackingSearch(assignment, cap)<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**if** result != failure:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**return** result<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assignment[var] = null<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;**return** failure<br>
            **return** result<br>
          **return** failure<br>
