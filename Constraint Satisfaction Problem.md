@@ -25,14 +25,14 @@ Common constraints are
    + Generate all possible assignments --> test each one
    - problem: exponential number of combinations
 2. Backtracking Search (The standard algorithm for CSPs)
-   **BacktrackingSearch(assignment, cap):**
-     **if** assignment is complete:
-       **return** assignment
-     var = **SelectUnassignedVariable(cap)
-     **for** each value **in** Order DomainValyes(var, cap):
-       **if** valueis consistent with assignment:
-         assignment[var] = value
-         result = BacktrackingSearch(assignment, cap)
-         **if** result != failure:
-           **return** result
-         **return** failure
+   **BacktrackingSearch(assignment, cap):** <br>
+     **if** assignment is complete:<br>
+       **return** assignment<br>
+     var = **SelectUnassignedVariable(cap)<br>
+     **for** each value **in** Order DomainValyes(var, cap):<br>
+       **if** valueis consistent with assignment:<br>
+         assignment[var] = value<br>
+         result = BacktrackingSearch(assignment, cap)<br>
+         **if** result != failure:<br>
+           **return** result<br>
+         **return** failure<br>
