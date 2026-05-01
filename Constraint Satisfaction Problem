@@ -1,2 +1,0 @@
-## Core Idea
-Constraint Satisfaction Problems (CSPs) finds values for a set of variables such that all constraints are satistifed. Instead of teaching for a path to a goal, it searches for an assifnment that satisfies all the fules.
