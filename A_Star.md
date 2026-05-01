@@ -24,22 +24,29 @@ It balances what you have already spent (g) and what you expect to spend (h)
 
 #### Pseudo Code
 
-def A_start(start, goal):
+```python
+def A_star(start, goal):
     open_set = priority queue ordered by f(n)
     open_set.push(start)
-    g = {start:0}
+
+    g = {start: 0}
     parent = {}
+
     while open_set is not empty:
-      current = node with lowesr f(n)
-      if current == goal:
-        return reconstruct_path(parent, current)
-      for neighbor in neighbors(current):
-        tentative_g = g[current] + cost(current, neighbor)
-        if neighbor not in g or tentative_g < g[neighbor]:
-          parent[neighbor] = current
-          g[neighbor] = tentative_g
-          f = g[neighbor] + h(neighbor)
-          add/update neighbor in open_set with priority f
+        current = node with lowest f(n)
+
+        if current == goal:
+            return reconstruct_path(parent, current)
+
+        for neighbor in neighbors(current):
+            tentative_g = g[current] + cost(current, neighbor)
+
+            if neighbor not in g or tentative_g < g[neighbor]:
+                parent[neighbor] = current
+                g[neighbor] = tentative_g
+                f = g[neighbor] + h(neighbor)
+                add/update neighbor in open_set with priority f
+```
 
 A-star finds the best path only if heuristic is admissible.
 
