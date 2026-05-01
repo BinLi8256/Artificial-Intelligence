@@ -110,3 +110,17 @@ assignment = {A: Red, B: Blue, C: Red}
 ```text
 {A: Red, B: Blue, C: Red}
 ```
+
+### 6. Degree Heuristic
+
+Backtracking search is the algorithm we used to solve the CSP. Degress heuristic is a strategy inside the algorithm. It is how you choose what to do next. <br>
+
+This is the full solving procedure of backtracking search:
+   1. pick an unassigned varaible
+   2. try a value
+   3. check consistency
+   4. recurse
+   5. if it fails --> backtrack and try another valye
+
+**Degree Heuristic** answers one question inside backtracking "which variable should i assign next?". Instead of picking randomly, it says "pick the variable with most constraints on others".
+
