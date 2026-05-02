@@ -19,8 +19,10 @@ Three patterns that determine independece: chain, fork, and collider.
 
 **Chain**
 A --> B --> C: A and C are independent given B (B blocks the path between A and C)
+
 **Fork**
 A <-- B --> C: A and C are independent given B (B is a common cause)
+
 **Collider**
 A --> B <-- C: A and C are dependent given B (Observing B opens the path)
 
