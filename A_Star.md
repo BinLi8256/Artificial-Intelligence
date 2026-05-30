@@ -56,7 +56,7 @@ A heuristic function h(n) is an estimate of the cost to reach the goal from a gi
 
 Since finding the true remaining cost is often as hard as solving the whole problem, the heuristic gives a "best guess" based on available information -- allowing search algorithms to prioritize which nodes to explore first.
 
-The **key idea" is, instead of blindly expanding every possible path, a heuristic guides the search toward the goal more efficiently.
+The **key idea** is, instead of blindly expanding every possible path, a heuristic guides the search toward the goal more efficiently.
 
 ##### Important properties
 
