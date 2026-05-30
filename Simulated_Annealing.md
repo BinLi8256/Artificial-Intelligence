@@ -43,7 +43,16 @@ High temperature accepts many bad moves. Low temperature accepts very few bad mo
 
 #### Acceptance Probability
 
-Suppose current cost = 10, neighbor cost = 12. The solution got worse by ΔE = 12 - 10 = 2
+Suppose 
+current cost = 10, 
+neighbor cost = 12. 
+
+The solution got worse by 
+ΔE = 12 - 10 = 2
+
+Acceptance probability 
+
+P=e^{-\Delta E/T}
 
 
 
