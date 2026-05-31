@@ -11,3 +11,18 @@ Search Problems:
 CSPs:
     How should I fill in the blanks?
 ``````
+
+**Example**
+
+``````
+A = ?
+B = ?
+C = ?
+``````
+
+subject to:
+
+`````
+A ≠ B
+B ≠ C
+`````
