@@ -116,9 +116,7 @@ where:
 T = 100
 ```
 
-\[
-P = e^{-2/100} \approx 0.98
-\]
+$P = e^{-2/100} \approx 0.98$
 
 **98% chance of accepting the worse move.**
 
@@ -131,9 +129,7 @@ P = e^{-2/100} \approx 0.98
 T = 0.1
 ```
 
-\[
-P = e^{-20} \approx 2 \times 10^{-9}
-\]
+$P = e^{-20} \approx 2 \times 10^{-9}$
 
 **Almost never accepted.**
 
@@ -185,9 +181,7 @@ The temperature gradually decreases during the search.
 
 A common cooling schedule is:
 
-\[
-T_{new} = \alpha T_{old}
-\]
+$T_{new} = \alpha T_{old}$
 
 where:
 
