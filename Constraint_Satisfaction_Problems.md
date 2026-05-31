@@ -4,7 +4,7 @@ Constraint Satisfaction Problems (CSPs) fine values for a set of variables such 
 
 A useful way to think about it:
 
-`````````````````````
+``````
 Search Problems:
     How do I get there?
 
