@@ -104,8 +104,8 @@ $P = e^{-\Delta E / T}$
 
 where:
 
-- \$ \Delta E $ = increase in cost
-- \( T \) = current temperature
+- ${\Delta E}$ = increase in cost
+- T = current temperature
 
 ---
 
