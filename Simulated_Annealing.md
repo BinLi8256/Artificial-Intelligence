@@ -99,13 +99,12 @@ The solution became worse by:
 
 The acceptance probability is:
 
-\
 $P = e^{-\Delta E / T}$
-\
+
 
 where:
 
-- \( \Delta E \) = increase in cost
+- \$ \Delta E $ = increase in cost
 - \( T \) = current temperature
 
 ---
