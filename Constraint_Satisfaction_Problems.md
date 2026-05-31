@@ -260,7 +260,137 @@ D = 1
 ```
 Choose **A** first
 
+### 8. MRV (Minimum Remaining Values)
+This is usually taught together with Degree Heuristic.
 
+MRV answers:
+```
+Which variable is most constrained right now?
+```
+Rule:
+```
+Choose the variable with the fewest legal values remaining.
+```
+Example:
+```
+A = {Red}
+B = {Red, Blue}
+C = {Red, Blue, Green}
+```
+Choose **A** because it has only one choice left.
+
+**Relationship Between MRV and Degree**
+```
+MRV:
+    Fewest remaining values
+
+Degree:
+    Most constraints on neighbors
+```
+
+Typical strategy:
+```
+Use MRV first
+
+If tie:
+    Use Degree Heuristic
+```
+
+### 9. LCV (Least Constraining Value)
+Once a variable is selected:
+``
+A=?
+``
+Which value should we try first?
+LCV answers:
+``
+Choose the value that leaves the most options avaiable for neighboring variables.
+``
+Example:
+``
+A ∈ {Red, Green}
+``
+Suppose:
+``
+Red eliminates 5 future choices
+Green eliminates 1 future choice
+``
+Choose **Green** first.
+
+### 10. Forward Checking
+Up to now we only checked constraints after assigning values.
+
+Forward checking goes further.
+
+Suppose:
+``
+A = Red
+``
+and:
+``
+A ≠ B
+``
+Then:
+``
+Remove Red from B's domain
+``
+
+Before:
+``
+B = {Red, Blue}
+``
+After:
+``
+B = {Blue}
+``
+This helps detect failure earlier.
+
+### 11. Arc Consistency (AC-3)
+
+Forwarding checking looks only one step ahead.
+
+AC-3 repeatedly propagates constraints throught the network.
+
+Example:
+``
+X ≠ Y
+X = {Red}
+Y = {Red, Blue}
+``
+Since X must be Red:
+``
+Y cannot be Red
+``
+Therefore:
+``
+Y = {Blue}
+``
+
+AC-3 keeps applying this idea until no more values can be removed.
+
+### 12. Big Picture
+The entire CSP chapter is really one story:
+``
+CSP
+│
+├─ Variables
+├─ Domains
+└─ Constraints
+      │
+      ▼
+Backtracking Search
+      │
+      ├─ Which variable?
+      │      ├─ MRV
+      │      └─ Degree Heuristic
+      │
+      ├─ Which value?
+      │      └─ LCV
+      │
+      └─ Reduce search space
+             ├─ Forward Checking
+             └─ AC-3
+``
 
 
 
