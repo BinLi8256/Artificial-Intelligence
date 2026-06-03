@@ -143,7 +143,7 @@ which is impossible.
 #### Backtracking Search
 The standard CSP algorithm.
 
-**Key Idea**
+**Key Idea** <br>
 Instead of generating a complete assignment first like:
 ```
 Generate everything
