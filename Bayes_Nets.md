@@ -34,7 +34,7 @@ much fewer probabilities.
 ### 3. Bayes Rule Review
 
 ```
-P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}
+$P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}$
 ```
 
 #### Types of Reasoning
