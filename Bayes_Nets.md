@@ -2,68 +2,56 @@
 
 ## 1. What is a Bayesian Network?
 
-A **Bayesian Network (Bayes Net)** is a graphical model that represents probabilistic relationships among variables.
+A **Bayesian Network (Bayes Net)** is a graphical model that represents probabilistic relationships between variables. It shows how variables depend on each other using a directed graph, allowing us to reason about uncertainty efficiently.
 
-It uses a **directed acyclic graph (DAG)** to describe how variables depend on one another, allowing us to reason about uncertainty efficiently.
+A Bayes Net consists of:
 
-### A Bayes Net Consists of
+1. **Nodes**
+   - Random variables
 
-#### 1. Nodes
-- Random variables
+2. **Directed Edges**
+   - Causal or dependency relationships
 
-#### 2. Directed Edges
-- Causal or dependency relationships between variables
-
-#### 3. Conditional Probability Tables (CPTs)
-- Specify the probability of a node given its parents
-
-For a node \(X\) with parents \(Pa(X)\):
-
-\[
-P(X \mid Pa(X))
-\]
-
-For root nodes (no parents):
-
-\[
-P(X)
-\]
-
-which are simply prior probabilities.
+3. **Conditional Probability Tables (CPTs)**
+   - Probability of a node given its parents
+   - `P(Node | Parents)`
+   - Root nodes (no parents) have prior probabilities: `P(Node)`
 
 ---
 
 ## 2. Why Bayesian Networks?
 
-Without a Bayes Net, a joint probability distribution grows exponentially with the number of variables.
+Without a Bayes Net, for `n` binary variables, there are:
 
-For \(n\) binary variables:
-
-\[
+```math
 2^n
-\]
-
-possible assignments (combinations of values) exist.
-
-### Example
-
-For 10 binary variables:
-
-\[
-2^{10} = 1024
-\]
+```
 
 possible assignments.
 
-To represent the full joint distribution, we would need a probability for each assignment.
+For example:
 
----
+```math
+2^{10} = 1024
+```
+
+possible combinations for 10 binary variables.
+
+### Why is this a problem?
+
+A full joint probability distribution would require storing a probability for every possible assignment.
+
+As the number of variables grows, the number of combinations grows exponentially.
 
 ### The Power of Conditional Independence
 
-Bayes Nets dramatically reduce complexity by exploiting **conditional independence**.
+Bayes Nets exploit **conditional independence**.
 
-#### Example
+> Once you know a node's parents, it becomes independent of its non-descendants.
+
+### Example
+
+Network:
 
 ```text
 Cloudy → Rain → WetGrass
@@ -71,17 +59,17 @@ Cloudy → Rain → WetGrass
 
 Instead of storing:
 
-\[
-P(C, R, W)
-\]
+```math
+P(C,R,W)
+```
 
-we factorize it as:
+we can factorize it as:
 
-\[
-P(C)P(R \mid C)P(W \mid R)
-\]
+```math
+P(C)P(R|C)P(W|R)
+```
 
-This requires far fewer probabilities than storing the entire joint distribution.
+This requires far fewer probabilities.
 
 ---
 
@@ -89,19 +77,9 @@ This requires far fewer probabilities than storing the entire joint distribution
 
 Bayes Rule is the foundation of probabilistic inference:
 
-\[
-P(A \mid B)
-=
-\frac{P(B \mid A)P(A)}
-{P(B)}
-\]
-
-where:
-
-- \(P(A)\): prior probability
-- \(P(B \mid A)\): likelihood
-- \(P(B)\): evidence
-- \(P(A \mid B)\): posterior probability
+```math
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+```
 
 ---
 
@@ -109,8 +87,8 @@ where:
 
 ### Variables
 
-- Cancer (\(C\))
-- Test Result (\(T\))
+- Cancer (`C`)
+- Test Result (`T`)
 
 ### Network
 
@@ -120,48 +98,49 @@ Cancer → Test
 
 ### Given
 
-\[
+```math
 P(C) = 0.01
-\]
+```
 
-\[
-P(T=+ \mid C)=0.90
-\]
+```math
+P(+|C) = 0.90
+```
 
-\[
-P(T=+ \mid \neg C)=0.05
-\]
+```math
+P(+|\neg C) = 0.05
+```
 
 ### Question
 
-Compute:
+Find:
 
-\[
-P(C \mid T=+)
-\]
+```math
+P(C|+)
+```
 
 ### Solution
 
 Using Bayes Rule:
 
-\[
-P(C \mid +)
-=
-\frac{P(+ \mid C)P(C)}
-{P(+)}
-\]
+```math
+P(C|+) =
+\frac{P(+|C)P(C)}
+     {P(+)}
+```
 
 where
 
-\[
+```math
 P(+)
 =
-P(+ \mid C)P(C)
+P(+|C)P(C)
 +
-P(+ \mid \neg C)P(\neg C)
-\]
+P(+|\neg C)P(\neg C)
+```
 
-This illustrates how a positive test result updates our belief about having cancer.
+This illustrates the **base-rate effect**:
+
+> A positive test does not necessarily imply a high probability of disease.
 
 ---
 
@@ -169,9 +148,9 @@ This illustrates how a positive test result updates our belief about having canc
 
 ### Variables
 
-- Cancer (\(C\))
-- Test1 (\(T_1\))
-- Test2 (\(T_2\))
+- Cancer (`C`)
+- Test1 (`T1`)
+- Test2 (`T2`)
 
 ### Network
 
@@ -181,44 +160,50 @@ This illustrates how a positive test result updates our belief about having canc
    Test1  Test2
 ```
 
----
-
 ### Conditional Independence
 
 Given Cancer:
 
-\[
+```math
 T_1 \perp T_2 \mid C
-\]
+```
 
-This means:
+which means:
 
-\[
-P(T_1,T_2 \mid C)
+```math
+P(T_1,T_2|C)
 =
-P(T_1 \mid C)P(T_2 \mid C)
-\]
+P(T_1|C)P(T_2|C)
+```
 
 and equivalently:
 
-\[
-P(T_1 \mid T_2,C)
+```math
+P(T_1|T_2,C)
 =
-P(T_1 \mid C)
-\]
+P(T_1|C)
+```
+
+### Interpretation
+
+Once you know whether the patient has cancer, the outcome of Test1 provides no additional information about Test2.
+
+This conditional independence dramatically simplifies inference.
 
 ---
 
 ### Intuition
 
-The only reason Test1 and Test2 are related is because both depend on Cancer.
+Suppose:
 
 ```text
 Cancer → Test1
 Cancer → Test2
 ```
 
-If Cancer is already known:
+The only reason the tests are correlated is because both depend on Cancer.
+
+If we know:
 
 ```text
 Cancer = True
@@ -226,61 +211,59 @@ Cancer = True
 
 then:
 
-- Test1 positive does not make Test2 more likely
-- Test1 negative does not make Test2 less likely
+- Test1 being positive does not make Test2 more likely.
+- Test1 being negative does not make Test2 less likely.
 
-because Cancer already explains everything connecting them.
+Cancer already explains the relationship.
 
 ---
 
-### Important Subtle Point
+### Important Subtlety
 
 The statement
 
-\[
+```math
 T_1 \perp T_2 \mid C
-\]
+```
 
 does **not** mean Test1 and Test2 are always independent.
 
-It means they are independent **after conditioning on Cancer**.
+It means:
 
-Without knowing Cancer, they are generally dependent.
+> Test1 and Test2 are conditionally independent **after Cancer is known**.
+
+For example:
+
+```math
+P(T_1=+,T_2=+|C)
+=
+P(T_1=+|C)P(T_2=+|C)
+```
+
+```math
+P(T_1=+,T_2=-|C)
+=
+P(T_1=+|C)P(T_2=-|C)
+```
+
+```math
+P(T_1=-,T_2=+|C)
+=
+P(T_1=-|C)P(T_2=+|C)
+```
+
+The statement applies to the entire random variables, not only the positive-positive outcome.
 
 ---
 
-### Consequences
+## 3.3 Where Does Conditional Independence Come From?
 
-The conditional independence assumption allows us to factorize every outcome:
+Conditional independence comes from:
 
-\[
-P(T_1=+,T_2=+ \mid C)
-=
-P(T_1=+ \mid C)
-P(T_2=+ \mid C)
-\]
-
-\[
-P(T_1=+,T_2=- \mid C)
-=
-P(T_1=+ \mid C)
-P(T_2=- \mid C)
-\]
-
-\[
-P(T_1=-,T_2=+ \mid C)
-=
-P(T_1=- \mid C)
-P(T_2=+ \mid C)
-\]
-
-This greatly simplifies inference.
+1. The structure of the Bayesian Network
+2. The modeling assumptions encoded by the network
 
 ---
-
-## 4. Where Does Conditional Independence Come From?
-
-One of the most important ideas in Bayes Nets is that conditional independence is implied by the graph structure and modeling assumptions.
 
 ### Step 1: Network Structure
 
@@ -299,13 +282,15 @@ Cancer causes Test1
 Cancer causes Test2
 ```
 
+This structure is called a **fork** or **common-cause structure**.
+
 ---
 
 ### Step 2: Why Are Test1 and Test2 Related?
 
 Suppose we do **not** know whether the patient has cancer.
 
-If:
+If we observe:
 
 ```text
 Test1 = Positive
@@ -323,39 +308,41 @@ also becomes more likely.
 
 Therefore:
 
-\[
-P(T_2=+ \mid T_1=+)
+```text
+Test1 and Test2 are dependent
+```
+
+Mathematically:
+
+```math
+P(T_2=+|T_1=+)
 >
 P(T_2=+)
-\]
+```
 
-and Test1 and Test2 are dependent.
+because Test1 provides information about Cancer.
 
 ---
 
-### Step 3: What If Cancer Is Known?
+### Step 3: What Happens When Cancer Is Known?
 
-Suppose:
+Suppose we know:
 
 ```text
 Cancer = True
 ```
 
-Now Test1 no longer provides any new information about Cancer.
+Now Test1 no longer provides information about Cancer.
 
 Cancer is already known.
 
-The information flow is effectively blocked:
+The information flow is cut off.
 
-```text
-Test1 ← Cancer → Test2
-```
+As a result:
 
-Thus:
-
-\[
+```math
 T_1 \perp T_2 \mid C
-\]
+```
 
 ---
 
@@ -365,48 +352,61 @@ For every node:
 
 > A node is conditionally independent of its non-descendants given its parents.
 
-For Test1:
+For example:
 
-- Parent = Cancer
-- Non-descendant = Test2
+```text
+      Cancer
+      /    \
+   Test1  Test2
+```
+
+Given Cancer, Test1 is independent of everything else that is not its descendant.
 
 Therefore:
 
-\[
-Test1 \perp Test2 \mid Cancer
-\]
+```math
+T_1 \perp T_2 \mid C
+```
 
 ---
 
-## 5. Types of Reasoning
+## 4. Types of Reasoning
 
-Bayes Nets support multiple forms of inference.
+Bayesian Networks support several forms of reasoning.
 
-### 5.1 Forward (Causal) Reasoning
+### 4.1 Forward (Causal) Reasoning
 
 Given causes, infer effects.
 
 Example:
 
-\[
-P(\text{Traffic} \mid \text{Rain})
-\]
+```math
+P(\text{Traffic}|\text{Rain})
+```
+
+```text
+Rain → Traffic
+```
 
 ---
 
-### 5.2 Backward (Diagnostic) Reasoning
+### 4.2 Backward (Diagnostic) Reasoning
 
 Given evidence, infer causes.
 
 Example:
 
-\[
-P(\text{Rain} \mid \text{WetGrass})
-\]
+```math
+P(\text{Rain}|\text{WetGrass})
+```
+
+```text
+Rain → WetGrass
+```
 
 ---
 
-### 5.3 Intercausal Reasoning
+### 4.3 Intercausal Reasoning
 
 Given an effect, reason about competing causes.
 
@@ -418,111 +418,119 @@ Rain → WetGrass ← Sprinkler
 
 If WetGrass is observed, evidence for Rain can reduce belief in Sprinkler and vice versa.
 
-This phenomenon is called **Explaining Away**.
+This phenomenon is called:
+
+**Explaining Away**
 
 ---
 
-## 6. D-Separation (Graphical Independence)
+## 5. D-Separation (Independence in Graphs)
 
-D-Separation is the graphical method used to determine conditional independence.
+D-Separation provides a graphical method for determining conditional independence.
 
-There are three fundamental structures.
+Three fundamental structures appear repeatedly:
+
+1. Chain
+2. Fork
+3. Collider
 
 ---
 
-### 6.1 Chain
+### 5.1 Chain
+
+Structure:
 
 ```text
 A → B → C
 ```
 
-or
+Without observing B:
 
 ```text
-A ← B ← C
+A and C are dependent
 ```
 
-#### Rule
+Given B:
 
-Given \(B\):
+```text
+A ⊥ C | B
+```
 
-\[
-A \perp C \mid B
-\]
-
-Observing \(B\) blocks the path.
+Observing B blocks the path.
 
 ---
 
-### 6.2 Fork (Common Cause)
+### 5.2 Fork (Common Cause)
+
+Structure:
 
 ```text
 A ← B → C
 ```
 
-#### Rule
+Without observing B:
 
-Given \(B\):
+```text
+A and C are dependent
+```
 
-\[
-A \perp C \mid B
-\]
+Given B:
+
+```text
+A ⊥ C | B
+```
 
 Observing the common cause blocks the path.
 
 ---
 
-### 6.3 Collider
+### 5.3 Collider
+
+Structure:
 
 ```text
 A → B ← C
 ```
 
-#### Rule
+Without observing B:
 
-Without observing \(B\):
+```text
+A ⊥ C
+```
 
-\[
-A \perp C
-\]
+Given B:
 
-Observing \(B\):
+```text
+A and C become dependent
+```
 
-\[
-A \not\!\perp C \mid B
-\]
+Observing the collider opens the path.
 
-Observing a collider opens the path.
-
----
-
-## 7. Summary Table
-
-| Structure | Unobserved | Observe Middle Node |
-|------------|------------|------------|
-| Chain \(A \to B \to C\) | Dependent | Independent |
-| Fork \(A \leftarrow B \to C\) | Dependent | Independent |
-| Collider \(A \to B \leftarrow C\) | Independent | Dependent |
+This is the basis of **explaining away**.
 
 ---
 
-## 8. Key Takeaways
+## 6. Summary
 
 Bayesian Networks are powerful because they:
 
 1. Represent complex probabilistic relationships compactly.
-2. Exploit conditional independence to reduce computation.
-3. Support causal, diagnostic, and intercausal reasoning.
-4. Allow efficient updating of beliefs when new evidence arrives.
-5. Provide a graphical method (D-Separation) for determining independence relationships.
-6. Factor large joint distributions into smaller, manageable conditional probabilities.
+2. Exploit conditional independence to simplify computation.
+3. Support multiple forms of reasoning:
+   - Causal
+   - Diagnostic
+   - Intercausal
+4. Update beliefs efficiently as new evidence arrives.
+5. Provide a graphical framework for understanding independence through D-Separation.
 
-### Core Concepts to Master
+### Key Formula
 
-- Bayes Rule
-- Conditional Probability
-- Conditional Independence
-- Factorization of Joint Distributions
-- Chain, Fork, and Collider Structures
-- Explaining Away
-- D-Separation
+Joint distributions factorize according to the network structure:
+
+```math
+P(X_1,\ldots,X_n)
+=
+\prod_i P(X_i \mid Parents(X_i))
+```
+
+This factorization is the primary reason Bayesian Networks scale far better than storing a full joint probability table.
